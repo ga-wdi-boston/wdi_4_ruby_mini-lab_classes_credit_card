@@ -1,6 +1,7 @@
 require 'pry'
 
 class CreditCard
+  include Math
   attr_reader :card_type
   attr_accessor :name, :zip
   def initialize(name,card_type,card_num,x_month,x_year,ccv,zip)
@@ -29,6 +30,20 @@ class CreditCard
     @name && @zip.length == 5 && @card_num.length == 16 && time?
   end
 
+  def luhn?
+    arr = @card_num.chars.map{|c| c.to_i}.reverse
+    checkSum = arr.shift
+    checkD = 10 - (arr.map.with_index{|n, i| i%2==0? n*2 : n}.map{|n| sum_d(n)}.reduce(:+)*9)%10
+    checkD == @card_num[(@card_num.length)-1].to_i
+  end
+
+  def sum_d(num)
+    num.to_s.chars.map{|c| c.to_i}.reduce(:+)
+  end
+
 end
+
+aaron = CreditCard.new("aaron","visa","4223457648120189",05,16,234,"02458")
+
 
 binding.pry
