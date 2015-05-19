@@ -57,7 +57,6 @@ class CreditCard
     end
   end
 
-  private
   def passes_luhn?
     evens = []
     odds = []
@@ -66,8 +65,8 @@ class CreditCard
       if i.even?
         evens.push(num)
       else
-        if num * 2 > 9
-          odds.push(num * 2.to_s.each_char.map {|c| c.to_i }.reduce(:+))
+        if (num * 2) > 9
+          odds.push((num * 2).to_s.each_char.map {|c| c.to_i }.reduce(:+))
         else
           odds.push(num * 2)
         end
