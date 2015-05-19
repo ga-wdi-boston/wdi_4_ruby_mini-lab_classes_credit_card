@@ -32,6 +32,7 @@ class CreditCard
       false
     else
       true
+    end
   end
 
   def card_type
@@ -44,10 +45,11 @@ class CreditCard
     elsif cc_num.match(/ |  6(?:011|5[0-9]{2})[0-9]{12}/)
       'Discover'
     else
-          'Other'
+      'Other'
+    end
   end
 end
 
-my_credit_card = CreditCard.new '4039384738291837', '04/15', '374', 'Andrew Johnson', '39930'
+my_credit_card = CreditCard.new '5527304930339284', '04/15', '374', 'Andrew Johnson', '39930'
 
 binding.pry
